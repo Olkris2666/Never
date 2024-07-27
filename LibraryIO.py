@@ -2,6 +2,7 @@
 
 from stenway.sml import *
 
+# Maybe I should extend the code so that it supports JSON style read and write methods ?
 
 class Library:
     def __init__(self, path: str = "library.txt") -> None:
@@ -23,7 +24,7 @@ class Library:
     def __str__(self) -> str:
         pass
 
-    def read(self, path = None):
+    def smlread(self, path: str = None):
         
         # If no path or incorrect path, use default path from parent class arguments.
         if path == None or type(path) != str:   
@@ -75,8 +76,9 @@ class Library:
 
 
 
-    def write(self, path: str = None, nodestosave: list = None, printonly: bool = False): 
-
+    def smlwrite(self, path: str = None, nodestosave: list = None, printonly: bool = False): 
+        
+        # If no path or incorrect path, use default path from parent class arguments.
         if path == None or type(path) != str:
             path = self.path
 
@@ -117,4 +119,20 @@ class Library:
             print("Would save the above to:",path)
         else:
             file.save(path)
+
+    def smlbackup(self, path: str = None):
+
+        # If no path or incorrect path, use default path from parent class arguments.
+        if path == None or type(path) != str:   
+            path = self.path
+
+        file = SmlDocument.load(path)
+        file.setEndKeyword(None)
+        newpath = path.replace(".txt",".txt.old")
+        file.save(newpath)
+
+        # Should probably edit that code to make use of native Python file operations for better performance.
+        # It would also make the backup method cross compatible with SML and JSON.
+        # Also add support for multiple backups.
+
 
