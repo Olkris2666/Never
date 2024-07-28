@@ -2,4 +2,4 @@
 /library*.txt*
 __pycache__
 tmpclasses.py
-
+.gitignore
