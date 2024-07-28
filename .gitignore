@@ -1,0 +1,5 @@
+/Library/
+/library*.txt*
+__pycache__
+tmpclasses.py
+
